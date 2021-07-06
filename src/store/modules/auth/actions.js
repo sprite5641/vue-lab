@@ -14,9 +14,4 @@ export default {
     context.commit('auth', payload)
       
   },
-  auth(context, payload) {
-
-    context.commit('auth', payload)
-      
-  },
 };

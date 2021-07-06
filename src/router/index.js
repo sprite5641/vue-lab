@@ -5,7 +5,10 @@ import { createWebHistory, createRouter } from "vue-router";
 
 import Admin from "../layouts/Admin.vue";
 import Auth from "../layouts/Auth.vue";
-import store from '../store/index.js'
+import store from '../store/index.js';
+var jwt = require('jsonwebtoken');
+console.log(jwt);
+
 // views for Admin layout
 
 import Dashboard from "../pages/admin/Dashboard.vue";
@@ -98,6 +101,16 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
 
   const isAuthenticated = store.state.auth.token
+
+  if (isAuthenticated) {
+    const expireDate = jwt.decode(isAuthenticated).exp * 1000;
+    const dateNow = new Date().getTime();
+    const expire = expireDate - dateNow;
+
+    if (expire <= 0) {
+      store.dispatch('logout', null);
+    }
+  }
 
   if (to.name !== '/auth/login' && !isAuthenticated) next({ path: '/auth/login' })
   else next()

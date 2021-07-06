@@ -24,7 +24,6 @@
     "gulp": "4.0.2",
     "gulp-append-prepend": "1.0.8",
     "jsonwebtoken": "^8.5.1",
-    "nodemon": "^2.0.9",
     "store": "^2.0.12",
     "sweetalert2": "^11.0.18",
     "tailwindcss": "2.0.4",
